@@ -2,6 +2,8 @@ import { Grid, GridItem, Show, VStack } from "@chakra-ui/react";
 import React from "react";
 import NavBar from "./NavBar";
 import MovieGrid from "./MovieGrid";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import MovieDetails from "./MovieDetails";
 
 const Layout = () => {
   return (
@@ -20,10 +22,14 @@ const Layout = () => {
           <GridItem area="aside">Aside</GridItem>
         </Show>
 
-        <GridItem area="main" fontSize="25px" padding="0 20px">
-          <h1>Home Page</h1>
-          <MovieGrid />
-        </GridItem>
+        <Router>
+          <GridItem area="main" fontSize="25px" padding="0 20px">
+            <Routes>
+              <Route path="/" element={<MovieGrid />} />
+              <Route path="/movie/:id" element={<MovieDetails />} />
+            </Routes>
+          </GridItem>
+        </Router>
       </Grid>
     </div>
   );

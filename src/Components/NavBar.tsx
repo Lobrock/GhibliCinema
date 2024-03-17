@@ -1,5 +1,4 @@
 import { HStack, Text } from "@chakra-ui/react";
-import React from "react";
 import ColorSwitch from "./ColorSwitch";
 import SearchInput from "./SearchInput";
 import { BsCameraReels } from "react-icons/bs";

@@ -1,5 +1,4 @@
-import { Grid, GridItem, Show, VStack } from "@chakra-ui/react";
-import React from "react";
+import { Grid, GridItem, Show, } from "@chakra-ui/react";
 import NavBar from "./NavBar";
 import MovieGrid from "./MovieGrid";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
@@ -24,6 +23,7 @@ const Layout = () => {
 
         <Router>
           <GridItem area="main" fontSize="25px" padding="0 20px">
+            
             <Routes>
               <Route path="/" element={<MovieGrid />} />
               <Route path="/movie/:id" element={<MovieDetails />} />

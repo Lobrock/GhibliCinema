@@ -21,8 +21,6 @@ export interface Movie {
   locations: string[];
   vehicles: string[];
   url: string;
- 
-  
 }
 
 interface FetchFilmsResponse {
@@ -35,26 +33,24 @@ const MovieGrid = () => {
   const [error, setError] = useState<string>("");
 
   useEffect(() => {
-    
-      const fetchMovies = async () => {
-        try {
-          const response = await axios.get('https://ghibliapi.vercel.app/films');
-          setMovies(response.data);
-          console.log(response.data);
-          
-        } catch (err: any) {
-          setError(err)
-        }
+    const fetchMovies = async () => {
+      try {
+        const response = await axios.get('https://ghibliapi.vercel.app/films');
+        setMovies(response.data);
+        console.log(response.data);
+      } catch (err: any) {
+        setError(err);
       }
+    };
 
-      fetchMovies();
+    fetchMovies();
   }, []);
   return (
     <>
       {error && <Text>{error}</Text>}
-      <SimpleGrid columns={{ sm: 1, md: 2, lg: 3}} padding={10} spacing={10}>
+      <SimpleGrid columns={{ sm: 1, md: 2, lg: 3 }} padding={10} spacing={10}>
         {movies.map((movie) => (
-          <MovieCard movie={movie} />
+          <MovieCard key={movie.id} movie={movie} />
         ))}
       </SimpleGrid>
     </>

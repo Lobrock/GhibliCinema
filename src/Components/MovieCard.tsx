@@ -12,7 +12,7 @@ interface Props {
 const MovieCard = ({ movie }: Props) => {
   return (
     <Link to={`/movie/${movie.id}`}>
-      <Card borderRadius={10} overflow="hidden">
+      <Card width='400px' borderRadius={10} overflow="hidden">
         <Image height="350px" src={movie.image} />
 
         <CardBody>

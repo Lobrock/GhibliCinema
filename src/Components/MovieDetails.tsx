@@ -36,9 +36,19 @@ const MovieDetails: React.FC = () => {
     fetchMovieDetails();
   }, [id]);
 
+  const duration = movieDetails?.running_time;
+
+  const convert = (duration: any) => {
+    const hours = Math.floor(duration / 60);
+    const remainingMinutes = duration % 60;
+
+    return `${hours}h: ${remainingMinutes}m: 00s`;
+  };
+
   return (
     <div>
-      <Grid bg={movieDetails?.movie_banner}
+      <Grid
+        bg={movieDetails?.movie_banner}
         templateAreas={{
           lg: ` "aside main" "footer footer" `,
         }}
@@ -68,10 +78,10 @@ const MovieDetails: React.FC = () => {
             <Text>Release date: {movieDetails?.release_date}</Text>
           </GridItem>
           <GridItem area="main">
-            <Text>Rating: {movieDetails?.rt_score}</Text>
+            <Text>Rating: {movieDetails?.rt_score} </Text>
           </GridItem>
           <GridItem area="main">
-            <Text>Running time: {movieDetails?.running_time}</Text>
+            <Text>Duration: {convert(duration)}</Text>
           </GridItem>
         </VStack>
         <GridItem area="footer" p={50}>
@@ -86,15 +96,7 @@ const MovieDetails: React.FC = () => {
           </Button>
         </GridItem>
 
-        {/* <div>Title: {movieDetails?.title}</div> */}
-        {/* <div>{movieDetails?.original_title}</div> */}
-        {/* <Image height="500px" src={movieDetails?.image} /> */}
-        {/* <Image opacity={0.3} width="100%" src={movieDetails?.movie_banner} /> */}
-        {/* <div>{movieDetails?.description}</div> */}
-        {/* <div>{movieDetails?.director}</div> */}
-        {/* <div>{movieDetails?.release_date}</div> */}
-        {/* <div>{movieDetails?.running_time}</div> */}
-        {/* <div>{movieDetails?.rt_score}</div> */}
+      
       </Grid>
     </div>
   );

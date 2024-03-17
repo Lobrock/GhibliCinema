@@ -5,6 +5,7 @@ import { BsCameraReels } from "react-icons/bs";
 
 
 
+
 const NavBar = () => {
   return (
     <HStack padding="10px">

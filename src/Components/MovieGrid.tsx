@@ -23,11 +23,6 @@ export interface Movie {
   url: string;
 }
 
-interface FetchFilmsResponse {
-  count: string;
-  results: Movie[];
-}
-
 const MovieGrid = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [error, setError] = useState<string>("");
@@ -35,7 +30,7 @@ const MovieGrid = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await axios.get('https://ghibliapi.vercel.app/films');
+        const response = await axios.get("https://ghibliapi.vercel.app/films");
         setMovies(response.data);
         console.log(response.data);
       } catch (err: any) {

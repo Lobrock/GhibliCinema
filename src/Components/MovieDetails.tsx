@@ -62,7 +62,7 @@ const MovieDetails: React.FC = () => {
         <VStack>
           <GridItem area="main">
             <Text fontSize="2xl">
-              Title: {movieDetails?.title} ({movieDetails?.release_date})
+              {movieDetails?.title} ({movieDetails?.release_date})
             </Text>
           </GridItem>
           <GridItem area="main">
@@ -74,9 +74,7 @@ const MovieDetails: React.FC = () => {
           <GridItem area="main">
             <Text>Director: {movieDetails?.director}</Text>
           </GridItem>
-          <GridItem area="main">
-            <Text>Release date: {movieDetails?.release_date}</Text>
-          </GridItem>
+
           <GridItem area="main">
             <Text>Rating: {movieDetails?.rt_score} </Text>
           </GridItem>
@@ -95,8 +93,6 @@ const MovieDetails: React.FC = () => {
             Rezerve
           </Button>
         </GridItem>
-
-      
       </Grid>
     </div>
   );

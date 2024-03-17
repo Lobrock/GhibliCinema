@@ -1,8 +1,9 @@
 import { Movie } from "./MovieGrid";
-import { Card, CardBody, Heading, Image } from "@chakra-ui/react";
+import { Card, CardBody, HStack, Heading, Image } from "@chakra-ui/react";
 
 import { Link } from "react-router-dom";
 import HeartButton from "./HeartButton";
+import RatingScore from "./RatingScore";
 
 interface Props {
   movie: Movie;
@@ -18,9 +19,12 @@ const MovieCard = ({ movie }: Props) => {
           <Heading whiteSpace="nowrap" fontSize="2xl">
             {movie.title} ({movie.release_date})
           </Heading>
-          <Heading color="gray.400" fontSize="1xl">
-            {movie.original_title}
-          </Heading>
+          <HStack justifyContent="space-between">
+            <Heading whiteSpace='nowrap' color="gray.400" fontSize="1xl">
+              {movie.original_title}
+            </Heading>
+            <RatingScore score={movie.rt_score} />
+          </HStack>
 
           <HeartButton />
         </CardBody>

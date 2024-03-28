@@ -1,9 +1,11 @@
 import { Button } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { IoIosHeart } from "react-icons/io";
+import { Movie } from "../hooks/useMovies";
 
 const HeartButton = () => {
   const [clicked, setClicked] = useState(false);
+
   const handleClick = (event: any) => {
     event.preventDefault();
     event.stopPropagation();

@@ -34,13 +34,13 @@ const MovieDetails: React.FC = () => {
 
   return (
     <div>
-      <Grid
+      <Grid padding={5}
         bg={movieDetails?.movie_banner}
         templateAreas={{
           lg: ` "aside main" "footer footer" `,
         }}
       >
-        <GridItem area="aside">
+        <GridItem marginRight={5} area="aside">
           <Image height="500px" src={movieDetails?.image} />
         </GridItem>
         <VStack>
@@ -66,14 +66,15 @@ const MovieDetails: React.FC = () => {
             <Text>Duration: {convert(duration)}</Text>
           </GridItem>
         </VStack>
+        
         <GridItem area="footer" p={50}>
-          <Button mr={50} bg="aquamarine">
+          <Button mr={50} bg="tomato">
             Watch Now
           </Button>
-          <Button mr={50} bg="aquamarine" width="110px">
+          <Button mr={50} bg="tomato" width="110px">
             Buy
           </Button>
-          <Button bg="aquamarine" width="110px">
+          <Button bg="tomato" width="110px">
             Rezerve
           </Button>
         </GridItem>

@@ -6,14 +6,17 @@ import MovieGrid from "../Components/MovieGrid";
 import Layout from "../Components/Layout";
 
 const HomeButton = () => {
-  const handleClick = () => {
-    return <Layout />;
-  };
+  
+  
 
   return (
-    <Button onClick={handleClick} width={100} marginBottom={5}>
+    <Link to={"/"}>
+     <Button width={100} marginBottom={5}>
       Home
     </Button>
+    
+    </Link>
+   
   );
 };
 

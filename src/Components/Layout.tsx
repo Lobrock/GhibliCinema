@@ -10,38 +10,38 @@ import { useState } from "react";
 import { Movie } from "../hooks/useMovies";
 
 const Layout = () => {
-  const [selectHome, setSelectHome] = useState<Movie | null>(null)
+  const [selectHome, setSelectHome] = useState<Movie | null>(null);
   return (
     <div>
-      <Grid
-        templateAreas={{
-          base: `"nav" "main"`,
-          lg: `"nav nav" "aside main"`,
-        }}
-      >
-        <GridItem area="nav">
-          <NavBar />
-        </GridItem>
-
-        <Show above="lg">
-          <GridItem area="aside">
-            <VStack padding={5} marginTop={150}>
-              <HomeButton />
-              <MyFavs />
-              <MyTickets />
-            </VStack>
+      <Router>
+        <Grid padding={5}
+          templateAreas={{
+            base: `"nav" "main"`,
+            lg: `"nav nav" "aside main"`,
+          }}
+        >
+          <GridItem area="nav">
+            <NavBar />
           </GridItem>
-        </Show>
 
-        <Router>
+          <Show above="lg">
+            <GridItem bg="gray.900" width={150} area="aside" borderRadius={30}>
+              <VStack padding={5} marginTop={150}>
+                <HomeButton />
+                <MyFavs />
+                <MyTickets />
+              </VStack>
+            </GridItem>
+          </Show>
+
           <GridItem area="main" fontSize="25px" padding="0 20px">
             <Routes>
               <Route path="/" element={<MovieGrid />} />
               <Route path="/movie/:id" element={<MovieDetails />} />
             </Routes>
           </GridItem>
-        </Router>
-      </Grid>
+        </Grid>
+      </Router>
     </div>
   );
 };

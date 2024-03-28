@@ -1,20 +1,7 @@
 import { Button, Grid, GridItem, Image, Text, VStack } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
-interface Movie {
-  id: string;
-  title: string;
-  original_title: string;
-  image: string;
-  movie_banner: string;
-  description: string;
-  director: string;
-
-  release_date: string;
-  running_time: string;
-  rt_score: string;
-}
+import { Movie } from "../hooks/useMovies";
 
 const MovieDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -53,9 +40,6 @@ const MovieDetails: React.FC = () => {
           lg: ` "aside main" "footer footer" `,
         }}
       >
-        {/* <GridItem area='nav'>
-        <Image opacity={0.3} width="100%" height='50%' src={movieDetails?.movie_banner} />
-        </GridItem > */}
         <GridItem area="aside">
           <Image height="500px" src={movieDetails?.image} />
         </GridItem>

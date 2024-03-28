@@ -1,4 +1,4 @@
-import { Movie } from "./MovieGrid";
+import { Movie } from "../hooks/useMovies";
 import { Card, CardBody, HStack, Heading, Image } from "@chakra-ui/react";
 
 import { Link } from "react-router-dom";

@@ -6,15 +6,15 @@ import MovieDetails from "./MovieDetails";
 import MyFavs from "../Pages/MyFavs";
 import MyTickets from "../Pages/MyTickets";
 import HomeButton from "../Pages/HomeButton";
+import LikedMovies from "./LikedMovies";
 import { useState } from "react";
-import { Movie } from "../hooks/useMovies";
 
 const Layout = () => {
-  const [selectHome, setSelectHome] = useState<Movie | null>(null);
   return (
     <div>
       <Router>
-        <Grid padding={5}
+        <Grid
+          padding={5}
           templateAreas={{
             base: `"nav" "main"`,
             lg: `"nav nav" "aside main"`,

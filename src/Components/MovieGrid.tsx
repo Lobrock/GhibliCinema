@@ -1,9 +1,7 @@
 import { SimpleGrid, Text } from "@chakra-ui/react";
 import MovieCard from "./MovieCard";
 import CardSceleton from "./CardSceleton";
-import useMovies, { Movie } from "../hooks/useMovies";
-
-
+import useMovies from "../hooks/useMovies";
 
 const MovieGrid = () => {
   const { movies, error, isLoading } = useMovies();

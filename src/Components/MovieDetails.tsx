@@ -1,4 +1,12 @@
-import { Button, Grid, GridItem, Image, Text, VStack } from "@chakra-ui/react";
+import {
+  Button,
+  Grid,
+  GridItem,
+  HStack,
+  Image,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Movie } from "../hooks/useMovies";
@@ -34,7 +42,8 @@ const MovieDetails: React.FC = () => {
 
   return (
     <div>
-      <Grid padding={5}
+      <Grid
+        padding={5}
         bg={movieDetails?.movie_banner}
         templateAreas={{
           lg: ` "aside main" "footer footer" `,
@@ -62,21 +71,25 @@ const MovieDetails: React.FC = () => {
           <GridItem area="main">
             <Text>Rating: {movieDetails?.rt_score} </Text>
           </GridItem>
+
           <GridItem area="main">
             <Text>Duration: {convert(duration)}</Text>
           </GridItem>
+          <GridItem area="main">
+            <Text>Price: 700 Leke</Text>
+          </GridItem>
         </VStack>
-        
+
         <GridItem area="footer" p={50}>
-          <Button mr={50} bg="tomato">
-            Watch Now
-          </Button>
-          <Button mr={50} bg="tomato" width="110px">
-            Buy
-          </Button>
-          <Button bg="tomato" width="110px">
-            Rezerve
-          </Button>
+          <HStack justifyContent="space-between">
+            <Button bg="tomato">Watch Trailer</Button>
+            <Button bg="tomato" width="110px">
+              Buy
+            </Button>
+            <Button bg="tomato" width="110px">
+              Rezerve
+            </Button>
+          </HStack>
         </GridItem>
       </Grid>
     </div>

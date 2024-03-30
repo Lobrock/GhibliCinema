@@ -26,7 +26,7 @@ const MovieCard = ({ movie }: Props) => {
             <RatingScore score={movie.rt_score} />
           </HStack>
 
-          <HeartButton />
+          <HeartButton movie={movie}/>
         </CardBody>
       </Card>
     </Link>

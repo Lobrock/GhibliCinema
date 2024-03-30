@@ -1,22 +1,42 @@
 import { Button } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoIosHeart } from "react-icons/io";
 import { Movie } from "../hooks/useMovies";
+import { useLikedMovies } from "./LikedMoviesContext";
 
-const HeartButton = () => {
-  const [clicked, setClicked] = useState(false);
+interface LikeButtonProps {
+  movie: Movie;
+}
+
+
+const HeartButton = ({movie}: LikeButtonProps) => {
+  const { addToLikedMovies, removeLikedMovie, likedMovies } = useLikedMovies();
+  const [liked, setLiked] = useState(false);
+
+  useEffect(() => {
+    if (likedMovies.some(m => m.id === movie.id)) {
+      setLiked(true);
+    } else {
+      setLiked(false);
+    }
+  }, [movie.id, likedMovies]);
 
   const handleClick = (event: any) => {
     event.preventDefault();
     event.stopPropagation();
-    setClicked(!clicked);
+    setLiked(!liked);
+    if (!liked) {
+      addToLikedMovies(movie);
+    } else {
+      removeLikedMovie(movie.id)
+    }
   };
   return (
     <Button onClick={handleClick}>
       <IoIosHeart
         cursor="pointer"
         size="30"
-        color={clicked ? "red" : "black"}
+        color={liked ? "red" : "black"}
       />
     </Button>
   );

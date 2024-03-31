@@ -6,10 +6,13 @@ import MovieDetails from "./MovieDetails";
 import MyFavs from "../Pages/MyFavs";
 import MyTickets from "../Pages/MyTickets";
 import HomeButton from "../Pages/HomeButton";
-import LikedMovies from "./LikedMovies";
 import { useState } from "react";
 
 const Layout = () => {
+  const [displayLikedMovies, setDisplayLikedMovies] = useState(false);
+  const toggleDisplayLikedMovies = () => {
+    setDisplayLikedMovies((prevState) => !prevState);
+  };
   return (
     <div>
       <Router>
@@ -28,7 +31,7 @@ const Layout = () => {
             <GridItem bg="gray.900" width={150} area="aside" borderRadius={30}>
               <VStack padding={5} marginTop={150}>
                 <HomeButton />
-                <MyFavs />
+                <MyFavs toggleDisplayLikedMovies={toggleDisplayLikedMovies} />
                 <MyTickets />
               </VStack>
             </GridItem>
@@ -36,7 +39,10 @@ const Layout = () => {
 
           <GridItem area="main" fontSize="25px" padding="0 20px">
             <Routes>
-              <Route path="/" element={<MovieGrid />} />
+              <Route
+                path="/"
+                element={<MovieGrid displayLikedMovies={displayLikedMovies} />}
+              />
               <Route path="/movie/:id" element={<MovieDetails />} />
             </Routes>
           </GridItem>

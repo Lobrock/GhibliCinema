@@ -1,9 +1,9 @@
+import { useState, useEffect } from "react";
 import { SimpleGrid, Text } from "@chakra-ui/react";
 import MovieCard from "./MovieCard";
-import CardSceleton from "./CardSceleton";
+import CardSkeleton from "./CardSceleton";
 import useMovies, { Movie } from "../hooks/useMovies";
 import { useLikedMovies } from "./LikedMoviesContext";
-import { useEffect, useState } from "react";
 
 interface Props {
   displayLikedMovies: boolean;
@@ -44,9 +44,13 @@ const MovieGrid: React.FC<Props> = ({ displayLikedMovies, searchTerm }) => {
   return (
     <>
       {isLoading || loading ? (
-        <SimpleGrid columns={{ sm: 1, md: 2, lg: 3 }} padding={10} spacing={10}>
+        <SimpleGrid
+          columns={{ sm: 1, md: 2, lg: 3 }}
+          padding={10}
+          spacing={10}
+        >
           {skeletons.map((skeleton) => (
-            <CardSceleton key={skeleton} />
+            <CardSkeleton key={skeleton} />
           ))}
         </SimpleGrid>
       ) : (

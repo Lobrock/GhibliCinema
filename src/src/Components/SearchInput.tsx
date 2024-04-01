@@ -1,12 +1,13 @@
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
-import { useRef, useState } from "react";
 import { BsSearch } from "react-icons/bs";
+import { useState } from "react";
 
 interface SearchInputProps {
   onSearch: (searchTerm: string) => void;
-}
+} 
 
 const SearchInput: React.FC<SearchInputProps> = ({ onSearch }) => {
+
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

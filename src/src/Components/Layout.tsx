@@ -23,7 +23,7 @@ const Layout = () => {
   const handleSearch = (term: string) => {
     setSearchTerm(term);
   };
-
+  
   return (
     <div>
       <Router>
@@ -35,15 +35,13 @@ const Layout = () => {
           }}
         >
           <GridItem area="nav">
-            <NavBar onSearch={handleSearch} />
+            <NavBar onSearch={handleSearch}/>
           </GridItem>
 
           <Show above="lg">
             <GridItem bg="gray.900" width={150} area="aside" borderRadius={30}>
               <VStack padding={5} marginTop={150}>
-                <HomeButton
-                  toggleDisplayLikedMovies={toggleDisplayLikedMovies1}
-                />
+                <HomeButton toggleDisplayLikedMovies={toggleDisplayLikedMovies1}/>
                 <MyFavs toggleDisplayLikedMovies={toggleDisplayLikedMovies} />
                 <MyTickets />
               </VStack>
@@ -54,12 +52,7 @@ const Layout = () => {
             <Routes>
               <Route
                 path="/"
-                element={
-                  <MovieGrid
-                    displayLikedMovies={displayLikedMovies}
-                    searchTerm={searchTerm}
-                  />
-                }
+                element={<MovieGrid displayLikedMovies={displayLikedMovies} searchTerm={searchTerm} />}
               />
               <Route path="/movie/:id" element={<MovieDetails />} />
             </Routes>

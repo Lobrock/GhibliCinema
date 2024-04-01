@@ -1,9 +1,22 @@
 import {
   Button,
+  FormControl,
+  FormLabel,
   Grid,
   GridItem,
   HStack,
   Image,
+  Input,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  NumberInput,
+  NumberInputField,
+  Select,
   Text,
   VStack,
 } from "@chakra-ui/react";
@@ -14,6 +27,39 @@ import { Movie } from "../hooks/useMovies";
 const MovieDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [movieDetails, setMovieDetails] = useState<Movie | null>(null);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [numberOfTickets, setNumberOfTickets] = useState(1);
+  const [selectedDate, setSelectedDate] = useState("");
+  const [expirationDate, setExpirationDate] = useState("");
+  const [selectedTime, setSelectedTime] = useState("");
+  const [selectedNumber, setSelectedNumber] = useState("");
+  const [selectedCvv, setSelectedCvv] = useState("");
+
+  const [isTrailerModalOpen, setIsTrailerModalOpen] = useState(false);
+  const [selectedVideoUrl, setSelectedVideoUrl] = useState("");
+
+  const handleWatchTrailer = () => {
+    
+    setSelectedVideoUrl("https://www.youtube.com/embed/yzRhB3wVU5U?si=wol4isxRvcyuKG3B"); 
+    setIsTrailerModalOpen(true);
+  };
+
+  const handleCloseTrailerModal = () => {
+    
+    setSelectedVideoUrl("");
+    setIsTrailerModalOpen(false);
+  };
+
+  
+  
+
+  const isFormValid =
+  !selectedCvv &&
+    !selectedDate &&
+    !expirationDate  &&
+    !selectedTime  &&
+    !selectedNumber;
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -38,6 +84,35 @@ const MovieDetails: React.FC = () => {
     const remainingMinutes = duration % 60;
 
     return `${hours}h: ${remainingMinutes}m: 00s`;
+  };
+
+  const OverlayOne = () => (
+    <ModalOverlay
+      bg='blackAlpha.300'
+      backdropFilter='blur(10px) hue-rotate(90deg)'
+    />
+    )
+    const [overlay, setOverlay] = React.useState(<OverlayOne />)
+
+  const handleBuyButtonClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setNumberOfTickets(1);
+    setSelectedDate("");
+    setSelectedTime("");
+    setExpirationDate("");
+  };
+
+  const handleNumberOfTicketsChange = (value: string) => {
+    setNumberOfTickets(parseInt(value));
+  };
+
+  const handleFormSubmit = () => {
+    console.log("Succes");
+    handleCloseModal();
   };
 
   return (
@@ -81,17 +156,128 @@ const MovieDetails: React.FC = () => {
         </VStack>
 
         <GridItem area="footer" p={50}>
-          <HStack justifyContent="space-between">
-            <Button bg="tomato">Watch Trailer</Button>
-            <Button bg="tomato" width="110px">
+          <HStack justifyContent="space-between" paddingInline={100}>
+            <Button bg="tomato" onClick={handleWatchTrailer}>Watch Our Movies</Button>
+            <Button bg="tomato" width="110px" onClick={() => {
+              setOverlay(<OverlayOne/>)
+              handleBuyButtonClick();
+            }}>
               Buy
             </Button>
-            <Button bg="tomato" width="110px">
-              Rezerve
-            </Button>
+            
           </HStack>
         </GridItem>
       </Grid>
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+        {overlay}
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Buy Tickets For: {movieDetails?.title}</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <VStack spacing={4}>
+              <FormControl isRequired >
+                <FormLabel>Number of Tickets (max 5 tickets)</FormLabel>
+                <NumberInput
+                  defaultValue={numberOfTickets}
+                  min={1}
+                  max={5}
+                  onChange={handleNumberOfTicketsChange}
+                >
+                  <NumberInputField />
+                </NumberInput>
+              </FormControl>
+
+              <FormControl isRequired>
+                <FormLabel>Date of Show</FormLabel>
+                <Input
+                  type="date"
+                  value={selectedDate}
+                  onChange={(e) => setSelectedDate(e.target.value)}
+                />
+              </FormControl>
+              <FormControl isRequired>
+                <FormLabel>Time</FormLabel>
+                <Select
+                  value={selectedTime}
+                  onChange={(e) => setSelectedTime(e.target.value)}
+                >
+                  <option value="17:00">5:00 PM</option>
+                  <option value="19:00">7:00 PM</option>
+                  <option value="21:00">9:00 PM</option>
+                  
+                </Select>
+              </FormControl>
+              <FormControl isRequired >
+                <FormLabel>Credit Card Number</FormLabel>
+                <Input type="text" placeholder="Card Number" />
+              </FormControl>
+              <FormControl isRequired>
+                <FormLabel>CVV</FormLabel>
+                <Input
+                  type="text"
+                  placeholder="CVV"
+                 
+                />
+                
+              </FormControl>
+              <FormControl isRequired >
+                <FormLabel>Expiration Date</FormLabel>
+                <Input
+                  type="date"
+                  value={expirationDate}
+                  onChange={(e) => setExpirationDate(e.target.value)}
+                />
+              </FormControl>
+              <FormControl >
+                <FormLabel>Total Amount</FormLabel>
+                <Input
+                  type="text"
+                  value={`${numberOfTickets * 700} Leke`}
+               
+                  isReadOnly
+                />
+              </FormControl>
+            </VStack>
+          </ModalBody>
+          <ModalFooter>
+            <Button
+              colorScheme="blue"
+              mr={3}
+              onClick={handleFormSubmit}
+              isDisabled={isFormValid}
+            >
+              Submit
+            </Button>
+            <Button onClick={handleCloseModal}>Cancel</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
+      <Modal isOpen={isTrailerModalOpen} onClose={handleCloseTrailerModal} size="xl">
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Watch All Our Movies</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            
+            {selectedVideoUrl && (
+              <iframe
+                width="100%"
+                height="400"
+                src={selectedVideoUrl}
+                title="YouTube Video Player"
+                allowFullScreen
+              />
+            )}
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="blue" onClick={handleCloseTrailerModal}>
+              Close
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </div>
   );
 };

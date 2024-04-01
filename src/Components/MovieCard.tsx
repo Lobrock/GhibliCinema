@@ -16,7 +16,7 @@ const MovieCard = ({ movie }: Props) => {
         <Image height="350px" src={movie.image} />
 
         <CardBody>
-          <Heading whiteSpace="nowrap" fontSize="2xl">
+          <Heading whiteSpace="nowrap" fontSize="1.3rem">
             {movie.title} ({movie.release_date})
           </Heading>
           <HStack justifyContent="space-between">

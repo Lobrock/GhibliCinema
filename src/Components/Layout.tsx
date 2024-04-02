@@ -11,17 +11,30 @@ import { useState } from "react";
 const Layout = () => {
   const [displayLikedMovies, setDisplayLikedMovies] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const [reservations, setReservations] = useState<{ movieTitle: string, numberOfTickets: number, selectedDate: string, selectedTime: string }[]>([]);
+  const [showReservations, setShowReservations] = useState(false);
 
   const toggleDisplayLikedMovies = () => {
     setDisplayLikedMovies(true);
+    setShowReservations(false);
   };
 
   const toggleDisplayLikedMovies1 = () => {
     setDisplayLikedMovies(false);
+    setShowReservations(false);
   };
 
   const handleSearch = (term: string) => {
     setSearchTerm(term);
+  };
+
+  const handleReservationComplete = (reservationData: { movieTitle: string, numberOfTickets: number, selectedDate: string, selectedTime: string }) => {
+    setReservations([...reservations, reservationData]);
+  };
+
+  const handleShowReservations = () => {
+    setShowReservations(true);
+    setDisplayLikedMovies(false);
   };
 
   return (
@@ -45,7 +58,7 @@ const Layout = () => {
                   toggleDisplayLikedMovies={toggleDisplayLikedMovies1}
                 />
                 <MyFavs toggleDisplayLikedMovies={toggleDisplayLikedMovies} />
-                <MyTickets />
+                <MyTickets onShowReservations={handleShowReservations} />
               </VStack>
             </GridItem>
           </Show>
@@ -58,10 +71,12 @@ const Layout = () => {
                   <MovieGrid
                     displayLikedMovies={displayLikedMovies}
                     searchTerm={searchTerm}
+                    reservations={reservations}
+                    showReservations={showReservations}
                   />
                 }
               />
-              <Route path="/movie/:id" element={<MovieDetails />} />
+              <Route path="/movie/:id" element={<MovieDetails onReservationComplete={handleReservationComplete}  />} />
             </Routes>
           </GridItem>
         </Grid>

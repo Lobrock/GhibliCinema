@@ -22,10 +22,18 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import useMovies, { Movie } from "../hooks/useMovies";
-import MovieGrid from "./MovieGrid";
+import { Movie } from "../hooks/useMovies";
 
-const MovieDetails: React.FC = () => {
+
+interface Props {
+  onReservationComplete: (reservationData: {
+    movieTitle: string;
+    numberOfTickets: number;
+    selectedDate: string;
+    selectedTime: string;
+}) => void}
+
+const MovieDetails: React.FC<Props> = ({onReservationComplete}) => {
   const { id } = useParams<{ id: string }>();
   const [movieDetails, setMovieDetails] = useState<Movie | null>(null);
 
@@ -119,7 +127,13 @@ const MovieDetails: React.FC = () => {
 
 
   const handleFormSubmit = () => {
-    console.log("Succes");
+    const reservationData = {
+      movieTitle: movieDetails?.title,
+      numberOfTickets,
+      selectedDate,
+      selectedTime,
+    };
+    onReservationComplete(reservationData);
     handleCloseModal();
     alert(`Congratulations! You just bought ${numberOfTickets} ${ticket}.`);
    

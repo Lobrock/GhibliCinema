@@ -3,7 +3,7 @@ import React from 'react'
 
 const CardSceleton = () => {
   return (
-    <Card width='400px' borderRadius={10} overflow="hidden" >
+    <Card width='390px' borderRadius={10} overflow="hidden" >
         <Skeleton height='350px' />
         <CardBody>
             <SkeletonText />
@@ -12,4 +12,4 @@ const CardSceleton = () => {
   )
 }
 
-export default CardSceleton
+export default CardSceleton;

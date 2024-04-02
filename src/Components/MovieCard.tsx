@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import HeartButton from "./HeartButton";
 import RatingScore from "./RatingScore";
 
+
 interface Props {
   movie: Movie;
 }
@@ -12,7 +13,7 @@ interface Props {
 const MovieCard = ({ movie }: Props) => {
   return (
     <Link to={`/movie/${movie.id}`}>
-      <Card width='400px' borderRadius={10} overflow="hidden">
+      <Card width='390px' borderRadius={10} overflow="hidden" className="card">
         <Image height="350px" src={movie.image} />
 
         <CardBody>

@@ -1,4 +1,5 @@
 import { Button } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 interface MyFavsProps {
   toggleDisplayLikedMovies: () => void;
@@ -9,9 +10,11 @@ const MyFavs = ({ toggleDisplayLikedMovies }: MyFavsProps) => {
     toggleDisplayLikedMovies();
   };
   return (
-    <Button onClick={toggleLikedMovies} width={100} marginBottom={5}>
-      My Favs
-    </Button>
+    <Link to={"/"}>
+      <Button onClick={toggleLikedMovies} width={100} marginBottom={5}>
+        My Favs
+      </Button>
+    </Link>
   );
 };
 

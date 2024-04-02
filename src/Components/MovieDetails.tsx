@@ -24,16 +24,16 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Movie } from "../hooks/useMovies";
 
-
 interface Props {
   onReservationComplete: (reservationData: {
     movieTitle: string;
     numberOfTickets: number;
     selectedDate: string;
     selectedTime: string;
-}) => void}
+  }) => void;
+}
 
-const MovieDetails: React.FC<Props> = ({onReservationComplete}) => {
+const MovieDetails: React.FC<Props> = ({ onReservationComplete }) => {
   const { id } = useParams<{ id: string }>();
   const [movieDetails, setMovieDetails] = useState<Movie | null>(null);
 
@@ -61,11 +61,12 @@ const MovieDetails: React.FC<Props> = ({onReservationComplete}) => {
   };
 
   const isFormValid =
-  selectedCvv.trim() !== "" &&
-  selectedDate.trim() !== "" &&
-  expirationDate.trim() !== "" &&
-  selectedTime.trim() !== "" &&
-  selectedNumber.trim() !== "";
+    selectedCvv.trim() !== "" &&
+    selectedCvv.length == 3 &&
+    selectedDate.trim() !== "" &&
+    expirationDate.trim() !== "" &&
+    selectedTime.trim() !== "" &&
+    selectedNumber.trim() !== "";
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -112,19 +113,14 @@ const MovieDetails: React.FC<Props> = ({onReservationComplete}) => {
     setSelectedTime("");
     setExpirationDate("");
     setSelectedNumber("");
-    setSelectedCvv("")
-    
-    
+    setSelectedCvv("");
   };
 
   const handleNumberOfTicketsChange = (value: string) => {
     setNumberOfTickets(parseInt(value));
   };
 
-  const ticket = numberOfTickets == 1 ? 'ticket' : 'tickets' ;
-    
-  
-
+  const ticket = numberOfTickets == 1 ? "ticket" : "tickets";
 
   const handleFormSubmit = () => {
     const reservationData = {
@@ -136,7 +132,6 @@ const MovieDetails: React.FC<Props> = ({onReservationComplete}) => {
     onReservationComplete(reservationData);
     handleCloseModal();
     alert(`Congratulations! You just bought ${numberOfTickets} ${ticket}.`);
-   
   };
 
   return (
@@ -245,13 +240,21 @@ const MovieDetails: React.FC<Props> = ({onReservationComplete}) => {
               </FormControl>
               <FormControl isRequired>
                 <FormLabel>Credit Card Number</FormLabel>
-                <Input type="text" placeholder="Card Number" value={selectedNumber}
-                  onChange={(e) => setSelectedNumber(e.target.value)}/>
+                <Input
+                  type="text"
+                  placeholder="Card Number"
+                  value={selectedNumber}
+                  onChange={(e) => setSelectedNumber(e.target.value)}
+                />
               </FormControl>
               <FormControl isRequired>
                 <FormLabel>CVV</FormLabel>
-                <Input type="text" placeholder="CVV" value={selectedCvv}
-                  onChange={(e) => setSelectedCvv(e.target.value)}/>
+                <Input
+                  type="text"
+                  placeholder="CVV - 3 numbers"
+                  value={selectedCvv}
+                  onChange={(e) => setSelectedCvv(e.target.value)}
+                />
               </FormControl>
               <FormControl isRequired>
                 <FormLabel>Expiration Date</FormLabel>
@@ -276,7 +279,6 @@ const MovieDetails: React.FC<Props> = ({onReservationComplete}) => {
               colorScheme="blue"
               mr={3}
               onClick={handleFormSubmit}
-              
               isDisabled={!isFormValid}
             >
               Submit

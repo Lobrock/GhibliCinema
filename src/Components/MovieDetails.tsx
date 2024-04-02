@@ -22,7 +22,8 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Movie } from "../hooks/useMovies";
+import useMovies, { Movie } from "../hooks/useMovies";
+import MovieGrid from "./MovieGrid";
 
 const MovieDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -40,26 +41,23 @@ const MovieDetails: React.FC = () => {
   const [selectedVideoUrl, setSelectedVideoUrl] = useState("");
 
   const handleWatchTrailer = () => {
-    
-    setSelectedVideoUrl("https://www.youtube.com/embed/yzRhB3wVU5U?si=wol4isxRvcyuKG3B"); 
+    setSelectedVideoUrl(
+      "https://www.youtube.com/embed/yzRhB3wVU5U?si=wol4isxRvcyuKG3B"
+    );
     setIsTrailerModalOpen(true);
   };
 
   const handleCloseTrailerModal = () => {
-    
     setSelectedVideoUrl("");
     setIsTrailerModalOpen(false);
   };
 
-  
-  
-
   const isFormValid =
-  !selectedCvv &&
-    !selectedDate &&
-    !expirationDate  &&
-    !selectedTime  &&
-    !selectedNumber;
+  selectedCvv.trim() !== "" &&
+  selectedDate.trim() !== "" &&
+  expirationDate.trim() !== "" &&
+  selectedTime.trim() !== "" &&
+  selectedNumber.trim() !== "";
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -88,11 +86,12 @@ const MovieDetails: React.FC = () => {
 
   const OverlayOne = () => (
     <ModalOverlay
-      bg='blackAlpha.300'
-      backdropFilter='blur(10px) hue-rotate(90deg)'
+      bg="blackAlpha.300"
+      backdropFilter="blur(10px) hue-rotate(90deg)"
     />
-    )
-    const [overlay, setOverlay] = React.useState(<OverlayOne />)
+  );
+
+  const [overlay, setOverlay] = useState(<OverlayOne />);
 
   const handleBuyButtonClick = () => {
     setIsModalOpen(true);
@@ -104,6 +103,10 @@ const MovieDetails: React.FC = () => {
     setSelectedDate("");
     setSelectedTime("");
     setExpirationDate("");
+    setSelectedNumber("");
+    setSelectedCvv("")
+    
+    
   };
 
   const handleNumberOfTicketsChange = (value: string) => {
@@ -113,6 +116,8 @@ const MovieDetails: React.FC = () => {
   const handleFormSubmit = () => {
     console.log("Succes");
     handleCloseModal();
+    alert(`Congratulations! You bought ${numberOfTickets} tickets!` )
+   
   };
 
   return (
@@ -125,7 +130,7 @@ const MovieDetails: React.FC = () => {
         }}
       >
         <GridItem marginRight={5} area="aside">
-          <Image height="500px" src={movieDetails?.image} />
+          <Image borderRadius={30} height="500px" src={movieDetails?.image} />
         </GridItem>
         <VStack>
           <GridItem area="main">
@@ -157,14 +162,25 @@ const MovieDetails: React.FC = () => {
 
         <GridItem area="footer" p={50}>
           <HStack justifyContent="space-between" paddingInline={100}>
-            <Button bg="tomato" onClick={handleWatchTrailer}>Watch Our Movies</Button>
-            <Button bg="tomato" width="110px" onClick={() => {
-              setOverlay(<OverlayOne/>)
-              handleBuyButtonClick();
-            }}>
-              Buy
+            <Button
+              bg="green"
+              onClick={() => {
+                setOverlay(<OverlayOne />);
+                handleWatchTrailer();
+              }}
+            >
+              Watch The Trailers
             </Button>
-            
+            <Button
+              bg="green"
+              width="110px"
+              onClick={() => {
+                setOverlay(<OverlayOne />);
+                handleBuyButtonClick();
+              }}
+            >
+              Buy Tickets
+            </Button>
           </HStack>
         </GridItem>
       </Grid>
@@ -176,7 +192,7 @@ const MovieDetails: React.FC = () => {
           <ModalCloseButton />
           <ModalBody>
             <VStack spacing={4}>
-              <FormControl isRequired >
+              <FormControl isRequired>
                 <FormLabel>Number of Tickets (max 5 tickets)</FormLabel>
                 <NumberInput
                   defaultValue={numberOfTickets}
@@ -202,26 +218,23 @@ const MovieDetails: React.FC = () => {
                   value={selectedTime}
                   onChange={(e) => setSelectedTime(e.target.value)}
                 >
+                  <option value="">Select a time</option>
                   <option value="17:00">5:00 PM</option>
                   <option value="19:00">7:00 PM</option>
                   <option value="21:00">9:00 PM</option>
-                  
                 </Select>
               </FormControl>
-              <FormControl isRequired >
+              <FormControl isRequired>
                 <FormLabel>Credit Card Number</FormLabel>
-                <Input type="text" placeholder="Card Number" />
+                <Input type="text" placeholder="Card Number" value={selectedNumber}
+                  onChange={(e) => setSelectedNumber(e.target.value)}/>
               </FormControl>
               <FormControl isRequired>
                 <FormLabel>CVV</FormLabel>
-                <Input
-                  type="text"
-                  placeholder="CVV"
-                 
-                />
-                
+                <Input type="text" placeholder="CVV" value={selectedCvv}
+                  onChange={(e) => setSelectedCvv(e.target.value)}/>
               </FormControl>
-              <FormControl isRequired >
+              <FormControl isRequired>
                 <FormLabel>Expiration Date</FormLabel>
                 <Input
                   type="date"
@@ -229,12 +242,11 @@ const MovieDetails: React.FC = () => {
                   onChange={(e) => setExpirationDate(e.target.value)}
                 />
               </FormControl>
-              <FormControl >
+              <FormControl>
                 <FormLabel>Total Amount</FormLabel>
                 <Input
                   type="text"
                   value={`${numberOfTickets * 700} Leke`}
-               
                   isReadOnly
                 />
               </FormControl>
@@ -245,7 +257,8 @@ const MovieDetails: React.FC = () => {
               colorScheme="blue"
               mr={3}
               onClick={handleFormSubmit}
-              isDisabled={isFormValid}
+              
+              isDisabled={!isFormValid}
             >
               Submit
             </Button>
@@ -254,13 +267,17 @@ const MovieDetails: React.FC = () => {
         </ModalContent>
       </Modal>
 
-      <Modal isOpen={isTrailerModalOpen} onClose={handleCloseTrailerModal} size="xl">
+      <Modal
+        isOpen={isTrailerModalOpen}
+        onClose={handleCloseTrailerModal}
+        size="xl"
+      >
+        {overlay}
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Watch All Our Movies</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            
             {selectedVideoUrl && (
               <iframe
                 width="100%"

@@ -5,17 +5,17 @@ import MyFavs from "./Pages/MyFavs";
 import MovieGrid from "./Components/MovieGrid";
 import LikedMovies from "./Components/LikedMovies";
 
-export const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <MovieGrid />,
-  },
-  {
-    path: "/mytickets",
-    element: <MyTickets />,
-  },
-  {
-    path: "/myfavs",
-    element: <MyFavs />,
-  },
-]);
+// export const router = createBrowserRouter([
+//   {
+//     path: "/",
+//     element: <MovieGrid />,
+//   },
+//   {
+//     path: "/mytickets",
+//     element: <MyTickets />,
+//   },
+//   {
+//     path: "/myfavs",
+//     element: <MyFavs />,
+//   },
+// ]);

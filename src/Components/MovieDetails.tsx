@@ -113,10 +113,15 @@ const MovieDetails: React.FC = () => {
     setNumberOfTickets(parseInt(value));
   };
 
+  const ticket = numberOfTickets == 1 ? 'ticket' : 'tickets' ;
+    
+  
+
+
   const handleFormSubmit = () => {
     console.log("Succes");
     handleCloseModal();
-    alert(`Congratulations! You bought ${numberOfTickets} tickets!` )
+    alert(`Congratulations! You just bought ${numberOfTickets} ${ticket}.`);
    
   };
 

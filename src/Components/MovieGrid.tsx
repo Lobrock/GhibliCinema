@@ -8,11 +8,21 @@ import { useEffect, useState } from "react";
 interface Props {
   displayLikedMovies: boolean;
   searchTerm: string;
-  reservations: { movieTitle: string, numberOfTickets: number, selectedDate: string, selectedTime: string }[];
+  reservations: {
+    movieTitle: string;
+    numberOfTickets: number;
+    selectedDate: string;
+    selectedTime: string;
+  }[];
   showReservations: boolean;
 }
 
-const MovieGrid: React.FC<Props> = ({ displayLikedMovies, searchTerm, reservations, showReservations  }) => {
+const MovieGrid: React.FC<Props> = ({
+  displayLikedMovies,
+  searchTerm,
+  reservations,
+  showReservations,
+}) => {
   const { likedMovies } = useLikedMovies();
   const { movies, error, isLoading } = useMovies();
   const skeletons = [1, 2, 3, 4, 5, 6];
@@ -44,64 +54,82 @@ const MovieGrid: React.FC<Props> = ({ displayLikedMovies, searchTerm, reservatio
   }, [searchTerm, movies]);
 
   return (
-<>
-  {isLoading || loading ? (
-    <SimpleGrid columns={{ sm: 1, md: 2, lg: 3 }} gap={5}>
-      {skeletons.map((skeleton) => (
-        <CardSceleton key={skeleton} />
-      ))}
-    </SimpleGrid>
-  ) : (
     <>
-      {showReservations ? (
-        <VStack spacing={4} padding={10} >
-          <Text fontSize="xl" fontWeight="bold" textAlign="center" paddingInline={500}>My Reservations</Text>
-          <SimpleGrid columns={{ sm: 1, md: 2, lg: 3 }} gap={5}>
-            {reservations.map((reservation, index) => (
-              <Box bg='purple' key={index} borderWidth="1px" borderRadius="20px" p={4}>
-                
-      <Text fontStyle='italic' fontWeight="bold">Movie Title: {reservation.movieTitle}</Text>
-                <Text fontStyle='oblique'>Number of Tickets: {reservation.numberOfTickets}</Text>
-                <Text >Date: {reservation.selectedDate}</Text>
-                <Text>Time: {reservation.selectedTime}</Text>
-              </Box>
-            ))}
-          </SimpleGrid>
-        </VStack>
+      {isLoading || loading ? (
+        <SimpleGrid columns={{ sm: 1, md: 2, lg: 3 }} gap={5}>
+          {skeletons.map((skeleton) => (
+            <CardSceleton key={skeleton} />
+          ))}
+        </SimpleGrid>
       ) : (
         <>
-          {displayLikedMovies ? (
+          {showReservations ? (
             <VStack spacing={4} padding={10}>
-              <Text fontSize="xl" fontWeight="bold" textAlign="center" paddingInline={500}>My Favorite Movies</Text>
-              <SimpleGrid
-                columns={{ sm: 1, md: 2, lg: 3 }}
-                gap={5}
+              <Text
+                fontSize="xl"
+                fontWeight="bold"
+                textAlign="center"
+                paddingInline={500}
               >
-                {likedMovies.map((movie) => (
-                  <MovieCard key={movie.id} movie={movie} />
+                My Reservations
+              </Text>
+              <SimpleGrid columns={{ sm: 1, md: 2, lg: 3 }} gap={5}>
+                {reservations.map((reservation, index) => (
+                  <Box
+                    key={index}
+                    borderWidth="1px"
+                    borderRadius="20px"
+                    p={4}
+                    borderColor="gold"
+                  >
+                    <Text marginBottom={3}>🎞️🎞️🎞️🎞️🎞️🎞️🎞️🎞️🎞️🍿</Text>
+
+                    <Text fontStyle="italic" fontWeight="bold">
+                      Movie Title: {reservation.movieTitle}
+                    </Text>
+                    <Text fontStyle="oblique">
+                      Number of Tickets: {reservation.numberOfTickets}
+                    </Text>
+                    <Text>Date: {reservation.selectedDate}</Text>
+                    <Text>Time: {reservation.selectedTime}</Text>
+                  </Box>
                 ))}
               </SimpleGrid>
             </VStack>
           ) : (
-            <VStack spacing={4} padding={10}>
-              {error && <Text>{error}</Text>}
-              {/* <Text fontSize="xl" fontWeight="bold" textAlign="center">All Movies</Text> */}
-                <SimpleGrid
-                  columns={{ sm: 1, md: 2, lg: 3 }}
-                  gap={5}
-                >
-                  {filteredMovies.map((movie) => (
-                    <MovieCard key={movie.id} movie={movie} />
-                  ))}
-                </SimpleGrid>
-              </VStack>
+            <>
+              {displayLikedMovies ? (
+                <VStack spacing={4} padding={10}>
+                  <Text
+                    fontSize="xl"
+                    fontWeight="bold"
+                    textAlign="center"
+                    paddingInline={500}
+                  >
+                    My Favorite Movies
+                  </Text>
+                  <SimpleGrid columns={{ sm: 1, md: 2, lg: 3 }} gap={5}>
+                    {likedMovies.map((movie) => (
+                      <MovieCard key={movie.id} movie={movie} />
+                    ))}
+                  </SimpleGrid>
+                </VStack>
+              ) : (
+                <VStack spacing={4} padding={10}>
+                  {error && <Text>{error}</Text>}
+                  {/* <Text fontSize="xl" fontWeight="bold" textAlign="center">All Movies</Text> */}
+                  <SimpleGrid columns={{ sm: 1, md: 2, lg: 3 }} gap={5}>
+                    {filteredMovies.map((movie) => (
+                      <MovieCard key={movie.id} movie={movie} />
+                    ))}
+                  </SimpleGrid>
+                </VStack>
+              )}
+            </>
           )}
         </>
       )}
     </>
-  )}
-</>
-
   );
 };
 

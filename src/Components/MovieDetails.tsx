@@ -105,7 +105,6 @@ const MovieDetails: React.FC<Props> = ({ onReservationComplete }) => {
 
   const handleBuyButtonClick = () => {
     setIsModalOpen(true);
-   
   };
 
   const handleCloseModal = () => {

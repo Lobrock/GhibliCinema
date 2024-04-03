@@ -11,7 +11,14 @@ import { useState } from "react";
 const Layout = () => {
   const [displayLikedMovies, setDisplayLikedMovies] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [reservations, setReservations] = useState<{ movieTitle: string, numberOfTickets: number, selectedDate: string, selectedTime: string }[]>([]);
+  const [reservations, setReservations] = useState<
+    {
+      movieTitle: string;
+      numberOfTickets: number;
+      selectedDate: string;
+      selectedTime: string;
+    }[]
+  >([]);
   const [showReservations, setShowReservations] = useState(false);
 
   const toggleDisplayLikedMovies = () => {
@@ -28,7 +35,12 @@ const Layout = () => {
     setSearchTerm(term);
   };
 
-  const handleReservationComplete = (reservationData: { movieTitle: string, numberOfTickets: number, selectedDate: string, selectedTime: string }) => {
+  const handleReservationComplete = (reservationData: {
+    movieTitle: string;
+    numberOfTickets: number;
+    selectedDate: string;
+    selectedTime: string;
+  }) => {
     setReservations([...reservations, reservationData]);
   };
 
@@ -76,7 +88,14 @@ const Layout = () => {
                   />
                 }
               />
-              <Route path="/movie/:id" element={<MovieDetails onReservationComplete={handleReservationComplete}  />} />
+              <Route
+                path="/movie/:id"
+                element={
+                  <MovieDetails
+                    onReservationComplete={handleReservationComplete}
+                  />
+                }
+              />
             </Routes>
           </GridItem>
         </Grid>

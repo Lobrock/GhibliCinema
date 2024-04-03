@@ -15,7 +15,7 @@ const HomeButton: React.FC<HomeButtonProps> = ({
 
   return (
     <Link to={"/"}>
-      <Button width={100} marginBottom={5} onClick={handleClick}>
+      <Button width={100} marginBottom={5} onClick={handleClick}> 
         Home
       </Button>
     </Link>

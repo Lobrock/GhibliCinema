@@ -263,7 +263,7 @@ const MovieDetails: React.FC<Props> = ({ onReservationComplete }) => {
               <FormControl isRequired>
                 <FormLabel>Expiration Date</FormLabel>
                 <Input
-                  type="date"
+                  type="month"
                   value={expirationDate}
                   onChange={(e) => setExpirationDate(e.target.value)}
                 />

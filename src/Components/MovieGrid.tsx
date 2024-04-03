@@ -58,7 +58,7 @@ const MovieGrid: React.FC<Props> = ({ displayLikedMovies, searchTerm, reservatio
           <Text fontSize="xl" fontWeight="bold" textAlign="center" paddingInline={500}>My Reservations</Text>
           <SimpleGrid columns={{ sm: 1, md: 2, lg: 3 }} gap={5}>
             {reservations.map((reservation, index) => (
-              <Box bg='tomato' key={index} borderWidth="1px" borderRadius="20px" p={4}>
+              <Box bg='purple' key={index} borderWidth="1px" borderRadius="20px" p={4}>
                 
       <Text fontStyle='italic' fontWeight="bold">Movie Title: {reservation.movieTitle}</Text>
                 <Text fontStyle='oblique'>Number of Tickets: {reservation.numberOfTickets}</Text>

@@ -243,7 +243,7 @@ const MovieDetails: React.FC<Props> = ({ onReservationComplete }) => {
               <FormControl isRequired>
                 <FormLabel>Credit Card Number (16 numbers)</FormLabel>
                 <Input
-                  type="text"
+                  type="number"
                   placeholder="Card Number"
                   value={selectedNumber}
                   onChange={(e) => setSelectedNumber(e.target.value)}
@@ -253,7 +253,7 @@ const MovieDetails: React.FC<Props> = ({ onReservationComplete }) => {
               <FormControl isRequired>
                 <FormLabel>CVV (3 numbers)</FormLabel>
                 <Input
-                  type="text"
+                  type="number"
                   placeholder="CVV - 3 numbers"
                   value={selectedCvv}
                   onChange={(e) => setSelectedCvv(e.target.value)}

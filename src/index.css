@@ -6,4 +6,18 @@
     transform: scale(1.03);
 }
 
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #171923;
+    border-radius: 10px;
+}
 
+
+.aside {
+    height: calc(100vh - 95px);
+    position: sticky;
+    top: calc(60px + 1rem);
+    margin-top: 1rem;
+}

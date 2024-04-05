@@ -59,13 +59,13 @@ const Layout = () => {
             lg: `"nav nav" "aside main"`,
           }}
         >
-          <GridItem area="nav">
-            <NavBar onSearch={handleSearch} />
+          <GridItem area="nav" className="navbar">
+            <NavBar  onSearch={handleSearch} />
           </GridItem>
 
           <Show above="lg">
-            <GridItem bg="gray.900" width={150} area="aside" borderRadius={30}>
-              <VStack padding={5} marginTop={150}>
+            <GridItem bg="gray.900" width={150} area="aside" borderRadius={30} className="aside">
+              <VStack padding={5} marginTop={150} >
                 <HomeButton
                   toggleDisplayLikedMovies={toggleDisplayLikedMovies1}
                 />

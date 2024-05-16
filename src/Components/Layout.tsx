@@ -60,12 +60,18 @@ const Layout = () => {
           }}
         >
           <GridItem area="nav" className="navbar">
-            <NavBar  onSearch={handleSearch} />
+            <NavBar onSearch={handleSearch} />
           </GridItem>
 
           <Show above="lg">
-            <GridItem bg="gray.900" width={150} area="aside" borderRadius={30} className="aside">
-              <VStack padding={5} marginTop={150} >
+            <GridItem
+              bg="gray.900"
+              width={150}
+              area="aside"
+              borderRadius={30}
+              className="aside"
+            >
+              <VStack padding={5} marginTop={150}>
                 <HomeButton
                   toggleDisplayLikedMovies={toggleDisplayLikedMovies1}
                 />
@@ -99,7 +105,9 @@ const Layout = () => {
             </Routes>
           </GridItem>
         </Grid>
-        <Text  className="close">All rights reserved! April 2024</Text>
+        <Text fontSize="20px" className="close">
+          *** All rights reserved! April 2024 ***
+        </Text>
       </Router>
     </div>
   );

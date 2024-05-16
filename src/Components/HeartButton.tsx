@@ -1,5 +1,5 @@
 import { Button } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { IoIosHeart } from "react-icons/io";
 import { Movie } from "../hooks/useMovies";
 import { useLikedMovies } from "./LikedMoviesContext";
@@ -34,6 +34,7 @@ const HeartButton = ({movie}: LikeButtonProps) => {
   return (
     <Button onClick={handleClick}>
       <IoIosHeart
+      className="like"
         cursor="pointer"
         size="30"
         color={liked ? "red" : "black"}

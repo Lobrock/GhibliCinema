@@ -1,5 +1,6 @@
 .card {
-    transition: transform 0.3s ease-in-out
+    transition: transform 0.3s ease-in-out;
+    
 }
 
 .card:hover {
@@ -20,4 +21,30 @@
     position: sticky;
     top: calc(60px + 1rem);
     margin-top: 1rem;
+}
+
+.logo {
+    animation: 4s linear 0s infinite running myRotate;
+    color: blue;
+}
+
+
+
+
+@keyframes myRotate{
+    100%{transform: rotateY(360deg);}
+    
+}
+
+.like {
+    animation: 4s linear 0s infinite running myRotate;
+}
+
+.close {
+    animation: 10s linear 0s infinite running mySlide;
+}
+
+@keyframes mySlide{
+    from{margin-left: 0;}
+    to{margin-left: 100%;}
 }

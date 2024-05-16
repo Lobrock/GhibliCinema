@@ -12,11 +12,11 @@ const NavBar: React.FC<NavBarProps> = ({ onSearch }) => {
   return (
     <HStack padding="10px">
       <Link to={"/"}>
-        <Text fontSize="20px" whiteSpace="nowrap" color="purple">
+        <Text fontSize="20px" whiteSpace="nowrap" color="blue" >
           Ghibli-Cinema
         </Text>
       </Link>
-      <BsCameraReels size="40px" color="purple" />
+      <BsCameraReels className="logo" size="40px"  />
 
       <SearchInput onSearch={onSearch} />
 

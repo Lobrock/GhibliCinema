@@ -23,6 +23,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Movie } from "../hooks/useMovies";
+import { px } from "framer-motion";
 
 interface Props {
   onReservationComplete: (reservationData: {
@@ -139,13 +140,12 @@ const MovieDetails: React.FC<Props> = ({ onReservationComplete }) => {
     <div>
       <Grid
         padding={5}
-        bg={movieDetails?.movie_banner}
         templateAreas={{
           lg: ` "aside main" "footer footer" `,
         }}
       >
         <GridItem marginRight={5} area="aside">
-          <Image borderRadius={30} height="500px" src={movieDetails?.image} />
+          <Image borderRadius={30} height="500px" src={movieDetails?.image}  />
         </GridItem>
         <VStack>
           <GridItem area="main">

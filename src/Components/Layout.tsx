@@ -1,4 +1,4 @@
-import { Grid, GridItem, Show, VStack } from "@chakra-ui/react";
+import { Grid, GridItem, Show, Text, VStack } from "@chakra-ui/react";
 import NavBar from "./NavBar";
 import MovieGrid from "./MovieGrid";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
@@ -99,6 +99,7 @@ const Layout = () => {
             </Routes>
           </GridItem>
         </Grid>
+        <Text  className="close">All rights reserved! April 2024</Text>
       </Router>
     </div>
   );
